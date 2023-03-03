@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import cl.phobos.superheroessearch.heroSearch.HeroSearchViewModel
 
@@ -36,14 +37,14 @@ fun SearchBox(viewModel: HeroSearchViewModel) {
             label = { Text(text ="Enter name") },
             leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Search Box") }
         )
-
+        val context = LocalContext.current
         Button(
             modifier = Modifier
                 .align(alignment = Alignment.CenterVertically)
                 .weight(2f)
                 .padding(start = 5.dp)
                 .height(40.dp),
-            onClick = {}){
+            onClick = {viewModel.searchHeroByName( context = context )}){
             Text("Search")
         }
     }

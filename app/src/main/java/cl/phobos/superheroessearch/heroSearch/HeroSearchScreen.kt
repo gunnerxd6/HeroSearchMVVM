@@ -7,7 +7,6 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cl.phobos.superheroessearch.heroSearch.components.HeroList
@@ -25,7 +24,7 @@ fun HeroSearchScreen(viewModel: HeroSearchViewModel) {
             }
         },
         content = {
-            Content(Modifier.padding(it),viewModel)
+            Content(Modifier.padding(it), viewModel)
         },
 
         )
@@ -34,15 +33,15 @@ fun HeroSearchScreen(viewModel: HeroSearchViewModel) {
 }
 
 @Composable
-fun Content(modifier: Modifier,viewModel: HeroSearchViewModel) {
+fun Content(modifier: Modifier, viewModel: HeroSearchViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(15.dp)
     ) {
-        SearchBox(viewModel)
+        SearchBox(viewModel =viewModel)
         Spacer(modifier = Modifier.height(5.dp))
-        HeroList()
+        HeroList(viewModel =viewModel)
     }
 }
 
