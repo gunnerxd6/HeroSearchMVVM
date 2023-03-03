@@ -16,13 +16,7 @@ import cl.phobos.superheroessearch.heroSearch.components.SearchBox
 @Composable
 fun HeroSearchScreen(viewModel: HeroSearchViewModel) {
     Scaffold(
-        topBar = {
-            TopAppBar {
-                Text(
-                    text = "Hero search", fontSize = 20.sp, color = Color.White
-                )
-            }
-        },
+        topBar = { TopBar()},
         content = {
             Content(Modifier.padding(it), viewModel)
         },
@@ -30,6 +24,17 @@ fun HeroSearchScreen(viewModel: HeroSearchViewModel) {
         )
 
 
+}
+@Composable
+fun TopBar() {
+
+    TopAppBar {
+        Row(modifier = Modifier.padding(5.dp)){
+            Text(
+                text = "Hero search", fontSize = 20.sp, color = Color.White
+            )
+        }
+    }
 }
 
 @Composable
