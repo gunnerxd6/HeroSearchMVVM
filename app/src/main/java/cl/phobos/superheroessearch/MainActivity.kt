@@ -3,6 +3,7 @@ package cl.phobos.superheroessearch
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -16,8 +17,12 @@ import cl.phobos.superheroessearch.heroSearch.HeroSearchScreen
 import cl.phobos.superheroessearch.heroSearch.HeroSearchViewModel
 import cl.phobos.superheroessearch.models.Routes
 import cl.phobos.superheroessearch.ui.theme.SuperHeroesSearchTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val heroesSearchViewModel:HeroSearchViewModel by viewModels()
+    private val heroesDetailsViewModel:HeroDetailsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,13 +39,13 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Routes.HeroSearchRoute.route) {
                             HeroSearchScreen(
-                                viewModel = HeroSearchViewModel(),
+                                viewModel = heroesSearchViewModel,
                                 navController = navigationController
                             )
                         }
                         composable("hero_details/{hero}") { backStackEntry ->
                             HeroDetailsScreen(
-                                viewModel = HeroDetailsViewModel(),
+                                viewModel = heroesDetailsViewModel,
                                 navController = navigationController,
                                 backStackEntry.arguments?.getString("hero")!!
                             )
