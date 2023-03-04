@@ -24,16 +24,16 @@ class HeroSearchViewModel : ViewModel() {
         _searchText.value = value
     }
 
-    fun searchHeroByName(context: Context) {
+    fun searchHeroByName() {
         viewModelScope.launch {
             val result = searchHeroByNameUseCase(name = searchText.value!!)
             if (result!!.response == "error") {
                 _heroesList.value = mutableListOf()
-                Toast.makeText(context,"No heroes found! :C",Toast.LENGTH_SHORT).show()
+
             } else {
                 _heroesList.value = result.results
             }
-            _searchText.value=""
+           // _searchText.value=""
         }
     }
 

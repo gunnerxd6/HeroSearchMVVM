@@ -29,6 +29,7 @@ data class Appearance (
 )
 
 data class Biography (
+    @SerializedName("full-name")
     val fullName: String,
     val alterEgos: String,
     val aliases: List<String>,

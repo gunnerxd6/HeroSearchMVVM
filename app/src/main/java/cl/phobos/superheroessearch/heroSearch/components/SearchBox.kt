@@ -16,11 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import cl.phobos.superheroessearch.heroSearch.HeroSearchViewModel
 
 
 @Composable
-fun SearchBox(viewModel: HeroSearchViewModel) {
+fun SearchBox(viewModel: HeroSearchViewModel, navController: NavHostController) {
 
     val searchText:String by viewModel.searchText.observeAsState(initial = "")
 
@@ -44,7 +45,7 @@ fun SearchBox(viewModel: HeroSearchViewModel) {
                 .weight(2f)
                 .padding(start = 5.dp)
                 .height(40.dp),
-            onClick = {viewModel.searchHeroByName( context = context )}){
+            onClick = {viewModel.searchHeroByName()}){
             Text("Search")
         }
     }
