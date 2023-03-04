@@ -9,16 +9,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import cl.phobos.superheroessearch.heroSearch.components.HeroList
 import cl.phobos.superheroessearch.heroSearch.components.SearchBox
 
 
 @Composable
-fun HeroSearchScreen(viewModel: HeroSearchViewModel) {
+fun HeroSearchScreen(viewModel: HeroSearchViewModel, navController: NavHostController) {
     Scaffold(
         topBar = { TopBar()},
         content = {
-            Content(Modifier.padding(it), viewModel)
+            Content(Modifier.padding(it), viewModel,navController = navController)
         },
 
         )
@@ -38,15 +39,15 @@ fun TopBar() {
 }
 
 @Composable
-fun Content(modifier: Modifier, viewModel: HeroSearchViewModel) {
+fun Content(modifier: Modifier, viewModel: HeroSearchViewModel, navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(15.dp)
     ) {
-        SearchBox(viewModel =viewModel)
+        SearchBox(viewModel =viewModel,navController = navController)
         Spacer(modifier = Modifier.height(5.dp))
-        HeroList(viewModel =viewModel)
+        HeroList(viewModel =viewModel, navController= navController)
     }
 }
 

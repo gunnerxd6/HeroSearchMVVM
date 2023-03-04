@@ -1,18 +1,19 @@
 package cl.phobos.superheroessearch.heroSearch
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.phobos.superheroessearch.heroSearch.data.domain.SearchHeroByNameUseCase
 import cl.phobos.superheroessearch.heroSearch.data.network.response.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HeroSearchViewModel : ViewModel() {
+@HiltViewModel
+class HeroSearchViewModel @Inject constructor(private val searchHeroByNameUseCase: SearchHeroByNameUseCase) :
+    ViewModel() {
 
-    val searchHeroByNameUseCase = SearchHeroByNameUseCase()
 
     private val _searchText = MutableLiveData<String>()
     val searchText: LiveData<String> = _searchText
@@ -24,16 +25,16 @@ class HeroSearchViewModel : ViewModel() {
         _searchText.value = value
     }
 
-    fun searchHeroByName(context: Context) {
+    fun searchHeroByName() {
         viewModelScope.launch {
             val result = searchHeroByNameUseCase(name = searchText.value!!)
             if (result!!.response == "error") {
                 _heroesList.value = mutableListOf()
-                Toast.makeText(context,"No heroes found! :C",Toast.LENGTH_SHORT).show()
+
             } else {
                 _heroesList.value = result.results
             }
-            _searchText.value=""
+            // _searchText.value=""
         }
     }
 
