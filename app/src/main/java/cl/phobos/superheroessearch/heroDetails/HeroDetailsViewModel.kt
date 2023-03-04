@@ -19,9 +19,6 @@ class HeroDetailsViewModel: ViewModel() {
     fun decodeHero(heroJson:String){
         val hero: Result = Gson().fromJson(heroJson,Result::class.java)
         _hero.value = hero
-        Log.i("imagen",_hero.value!!.image.url)
-
-
     }
 
 
