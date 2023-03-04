@@ -6,8 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cl.phobos.superheroessearch.heroSearch.data.network.response.Result
 import com.google.gson.Gson
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HeroDetailsViewModel: ViewModel() {
+@HiltViewModel
+class HeroDetailsViewModel @Inject constructor(): ViewModel() {
 
     private val _heroJson = MutableLiveData<String>()
     val heroJson: LiveData<String> = _heroJson
