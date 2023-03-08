@@ -7,9 +7,9 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Red200,
+    primaryVariant = Red700,
+    secondary = Green200
 )
 
 private val LightColorPalette = lightColors(
@@ -29,7 +29,8 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun SuperHeroesSearchTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    //darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {

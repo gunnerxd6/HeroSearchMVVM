@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import cl.phobos.superheroessearch.ads.BannerAds
 import coil.compose.rememberAsyncImagePainter
 
 
@@ -22,7 +23,7 @@ fun HeroDetailsScreen(
     viewModel: HeroDetailsViewModel, navController: NavHostController, hero: String
 ) {
 
-    Scaffold(content = { Content(modifier = Modifier.padding(it), viewModel = viewModel) })
+    Scaffold(content = { Content(modifier = Modifier.padding(it), viewModel = viewModel) }, bottomBar = { BannerAds()})
     viewModel.decodeHero(hero.replace("$$$", "/"))
 }
 
@@ -31,7 +32,7 @@ fun HeroDetailsScreen(
 fun Content(modifier: Modifier, viewModel: HeroDetailsViewModel) {
 
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(15.dp)
 
@@ -45,8 +46,8 @@ fun Content(modifier: Modifier, viewModel: HeroDetailsViewModel) {
                 Image(
                     modifier = modifier
                         .align(Center)
-                        .height(200.dp)
-                        .width(200.dp),
+                        .height(300.dp)
+                        .fillMaxWidth(),
                     painter = rememberAsyncImagePainter(viewModel.hero.value!!.image.url),
                     contentDescription = null,
                     contentScale = ContentScale.Crop
