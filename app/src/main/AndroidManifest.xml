@@ -12,7 +12,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperHeroesSearch"
+        android:usesCleartextTraffic="true"
+
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5699913438320950~3820416197"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true"

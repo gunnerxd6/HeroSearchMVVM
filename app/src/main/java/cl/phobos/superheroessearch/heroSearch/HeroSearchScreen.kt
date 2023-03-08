@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import cl.phobos.superheroessearch.ads.BannerAds
 import cl.phobos.superheroessearch.heroSearch.components.HeroList
 import cl.phobos.superheroessearch.heroSearch.components.SearchBox
 
@@ -21,6 +22,13 @@ fun HeroSearchScreen(viewModel: HeroSearchViewModel, navController: NavHostContr
         content = {
             Content(Modifier.padding(it), viewModel,navController = navController)
         },
+        bottomBar = {
+            Row(
+                horizontalArrangement = Arrangement.Center
+            ){
+                BannerAds()
+            }
+        }
 
         )
 

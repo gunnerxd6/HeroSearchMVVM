@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -30,82 +30,90 @@ fun HeroDetailsScreen(
 @Composable
 fun Content(modifier: Modifier, viewModel: HeroDetailsViewModel) {
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(15.dp)
 
     ) {
-        Text(viewModel.hero.value!!.name, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(10.dp))
-        Image(
-            modifier = Modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .height(200.dp)
-                .width(200.dp),
-            painter = rememberAsyncImagePainter(viewModel.hero.value!!.image.url),
-            contentDescription = null,
-            contentScale = ContentScale.Crop
+        item {
+            Text(viewModel.hero.value!!.name, fontSize = 30.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(10.dp))
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Image(
+                    modifier = modifier
+                        .align(Center)
+                        .height(200.dp)
+                        .width(200.dp),
+                    painter = rememberAsyncImagePainter(viewModel.hero.value!!.image.url),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
 
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
 
-        Column {
-            Text("Info:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            Text("Full name: ${viewModel.hero.value!!.biography.fullName}")
-            Text("Gender: ${viewModel.hero.value!!.appearance.gender}")
-            Text("Height: ${viewModel.hero.value!!.appearance.height[1]}")
-            Text("Weight: ${viewModel.hero.value!!.appearance.weight[1]}")
+            Column {
+                Text("Info:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text("Full name: ${viewModel.hero.value!!.biography.fullName}")
+                Text("Gender: ${viewModel.hero.value!!.appearance.gender}")
+                Text("Height: ${viewModel.hero.value!!.appearance.height[1]}")
+                Text("Weight: ${viewModel.hero.value!!.appearance.weight[1]}")
 
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        Column {
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+
             Text("Aliases:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        }
 
 
-            LazyColumn {
-                items(
-                    viewModel.hero.value!!.biography.aliases.size
-                ) {
-                    Text(viewModel.hero.value!!.biography.aliases[it])
-                }
+
+        items(
+            viewModel.hero.value!!.biography.aliases.size
+        ) {
+            Text(viewModel.hero.value!!.biography.aliases[it])
+        }
+
+
+
+        item {
+            Spacer(modifier = Modifier.height(10.dp))
+            Text("PowerStats:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Column {
+                PowerStat(
+                    statValue = viewModel.hero.value?.powerstats?.intelligence,
+                    statName = "Intelligence",
+                    color = Color.Green
+                )
+                PowerStat(
+                    statValue = viewModel.hero.value?.powerstats?.strength,
+                    statName = "Strength",
+                    color = Color.Red
+                )
+                PowerStat(
+                    statValue = viewModel.hero.value?.powerstats?.speed,
+                    statName = "Speed",
+                    color = Color.Blue
+                )
+                PowerStat(
+                    statValue = viewModel.hero.value?.powerstats?.durability,
+                    statName = "Durability",
+                    color = Color.Magenta
+                )
+                PowerStat(
+                    statValue = viewModel.hero.value?.powerstats?.power,
+                    statName = "Power",
+                    color = Color.Yellow
+                )
+                PowerStat(
+                    statValue = viewModel.hero.value?.powerstats?.combat,
+                    statName = "Combat",
+                    color = Color.Gray
+                )
             }
 
-        }
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Text("PowerStats:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        Column {
-            PowerStat(
-                statValue = viewModel.hero.value!!.powerstats.intelligence,
-                statName = "Intelligence",
-                color = Color.Green
-            )
-            PowerStat(
-                statValue = viewModel.hero.value!!.powerstats.strength,
-                statName = "Strength",
-                color = Color.Red
-            )
-            PowerStat(
-                statValue = viewModel.hero.value!!.powerstats.speed,
-                statName = "Speed",
-                color = Color.Blue
-            )
-            PowerStat(
-                statValue = viewModel.hero.value!!.powerstats.durability,
-                statName = "Durability",
-                color = Color.Magenta
-            )
-            PowerStat(
-                statValue = viewModel.hero.value!!.powerstats.power,
-                statName = "Power",
-                color = Color.Yellow
-            )
-            PowerStat(
-                statValue = viewModel.hero.value!!.powerstats.combat,
-                statName = "Combat",
-                color = Color.Gray
-            )
         }
 
     }

@@ -9,9 +9,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PowerStat(statValue:String,statName:String,color:Color){
+fun PowerStat(statValue: String?, statName: String, color: Color) {
+    var value: Float = 0F
+    if (statValue != null && statValue != "null") {
+        value = statValue.toFloat() / 100
+    }
     Text(statName)
     LinearProgressIndicator(
-        modifier= Modifier.height(12.dp),
-        progress = statValue.toFloat()/100, color = color)
+        modifier = Modifier.height(12.dp), progress = value, color = color
+    )
 }
